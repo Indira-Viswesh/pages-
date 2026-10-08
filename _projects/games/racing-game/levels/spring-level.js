@@ -9,7 +9,7 @@ class GameLevelSpring {
     const background_data = {
       name: "Spring Course",
       greeting: "Welcome to the spring level!",
-      src: "/images/projects/racing-game/spring_track_level_3.jpg",
+      src: "/images/projects/racing-game/Spring_track.jpg",
       pixels: { height: 360, width: 643 }
     };
     const player_data = {
