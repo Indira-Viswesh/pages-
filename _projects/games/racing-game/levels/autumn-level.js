@@ -33,6 +33,26 @@ class GameLevelAutumn {
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
         keypress: { up: 87, left: 65, down: 83, right: 68 } // W, A, S, D
     }
+    const other_data = {
+        name: "Blue Car",
+        greeting: "I'm the blue car!",
+        src: "/images/projects/racing-game/Directions_blue_car.png",
+        SCALE_FACTOR: 10,
+        STEP_FACTOR: 1100,
+        INIT_POSITION: {x: 340 / 740, y: 500 / 585},
+        pixels: { height: 1024, width: 1536 },
+        orientation: { rows: 4, columns: 4 },
+        up:        { row: 3, start: 0, columns: 1 },
+        upRight:   { row: 0, start: 2, columns: 1, rotate: Math.PI },
+        right:     { row: 3, start: 2, columns: 1, rotate: Math.PI },
+        downRight: { row: 2, start: 0, columns: 1 },
+        down:      { row: 0, start: 0, columns: 1 },
+        downLeft:  { row: 0, start: 2, columns: 1 },
+        left:      { row: 3, start: 2, columns: 1 },
+        upLeft:    { row: 2, start: 0, columns: 1, rotate: Math.PI },
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
+        keypress: { up: 38, left: 37, down: 40, right: 39 } // W, A, S, D
+    }
     const barrierData1 = {
       id: "barrier-1",
       coordinateSpace: "normalized",
@@ -54,19 +74,17 @@ class GameLevelAutumn {
       src: "/images/projects/racing-game/BoxObstacle.png",
       coordinateSpace: "normalized",
       SCALE_FACTOR: 10,
-      STEP_FACTOR: 1100,
-      pixels: { height: 1024, width: 1536 },
-      position: { x: 0.5, y: 0.5 },
-      orientation: { rows: 4, columns: 4 },
-      up: { row: 3, start: 0, columns: 1 },
-      upRight: { row: 0, start: 2, columns: 1, rotate: Math.PI },
-      right: { row: 1, start: 0, columns: 1 },
+      INIT_POSITION: { x: 0.47, y: 0.25 },
+      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
+      pixels: { height: 369, width: 676 },
+      orientation: { rows: 1, columns: 1 },
     };
 
 
     this.classes = [
       { class: GameEnvBackground, data: background_data },
       { class: Player, data: player_data },
+      { class: Player, data: other_data },
       { class: SplineBarrier, data: barrierData1 },
       { class: SplineBarrier, data: barrierData2 },
       { class: Character, data: BoxData },
