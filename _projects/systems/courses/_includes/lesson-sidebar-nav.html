@@ -101,42 +101,39 @@
             {%- assign weekData = sprint[week] -%}
             {%- comment -%}
               A week is a <details> element, so the browser opens and closes it.
-              Its summary reuses the sprint row's classes, so a week reads like
-              a sprint one level down: chevron, title, then its W and count
-              pills. The week's intro lines up with the chevron, and its lessons
-              and chat sit in an ocs__tree (the OCS tree grammar, in
-              _sass/open-coding/elements/trees), which indents them one level
-              and draws a guide line under the intro's icon. Each lesson's title
-              stays on one line (ocs__truncate) and ends with "…" when it doesn't
-              fit; the row's title attribute shows the whole title on hover. On a
-              touch screen, which can't hover, the title wraps instead
-              (ocs__truncate--hover).
-              Lessons use the narrow fa-file-code icon (12px, the same as an
-              assignment's fa-file-alt), which leaves room for one more letter.
-              The lesson's own week starts open, and the script in
-              _layouts/post.html turns the chevron when a week opens or closes.
+              Its summary is one line: the W pill, the week's title, then its
+              count pill. The title ends with "…" when it doesn't fit
+              (ocs__truncate) and the summary's title attribute shows it whole on
+              hover. It stays cut on a touch screen too: wrapped in a space this
+              narrow it would break mid-word, and the phone menu shows it whole.
+              The sidebar is only 250px wide, so the row has no chevron, which
+              leaves the title as much room as it can.
+              The week's intro, lessons and chat sit in an ocs__tree (the OCS
+              tree grammar, in _sass/open-coding/elements/trees), which indents
+              them one level under the summary and draws a guide line. Each row
+              stays on one line the same way. The intro and lessons use 12px
+              icons (fa-bookmark, fa-file-code, the same width as an
+              assignment's fa-file-alt) so "Week 12 intro" and lesson titles keep
+              room for one more letter. The lesson's own week starts open.
             {%- endcomment -%}
+            {%- if weekData.theme -%}{%- assign weekTitle = weekData.theme -%}{%- else -%}{%- assign weekTitle = "Week " | append: week -%}{%- endif -%}
             <details data-week-group data-week="{{ week }}"{% if week == current_week %} open{% endif %}>
-              <summary class="sprint-toggle">
-                <i class="fas {% if week == current_week %}fa-chevron-down{% else %}fa-chevron-right{% endif %} sprint-chevron" aria-hidden="true"></i>
-                <span class="sprint-info">
-                  <span class="lesson-title"><strong>{% if weekData.theme %}{{ weekData.theme | escape }}{% else %}Week {{ week }}{% endif %}</strong></span><br>
-                  <span class="ocs__status-pill ocs__status-pill--good">W{{ week }}</span>
-                  <span class="ocs__status-pill ocs__status-pill--neutral" data-week-count data-week-total="{{ weekPosts.size }}">0/{{ weekPosts.size }}</span>
-                </span>
+              <summary class="sprint-toggle" title="W{{ week }}: {{ weekTitle | escape }}">
+                <span class="ocs__status-pill ocs__status-pill--good">W{{ week }}</span>
+                <span class="lesson-title ocs__truncate"><strong>{{ weekTitle | escape }}</strong></span>
+                <span class="ocs__status-pill ocs__status-pill--neutral" data-week-count data-week-total="{{ weekPosts.size }}">0/{{ weekPosts.size }}</span>
               </summary>
 
-              {%- comment -%}
-                The week's intro page, with its learning goals, comes first, so
-                Next from the last lesson of the week before lands on it.
-              {%- endcomment -%}
-              {%- assign weekUrl = "/" | append: current_course | append: "/week-" | append: week | append: "/" -%}
-              <a href="{{ site.baseurl }}{{ weekUrl }}" class="lesson-item {% if page.url == weekUrl %}active{% endif %}">
-                <i class="fas fa-bullseye" aria-hidden="true"></i>
-                <span class="lesson-title">Week {{ week }} intro</span>
-              </a>
-
               <div class="ocs__tree">
+                {%- comment -%}
+                  The week's intro page, with its learning goals, comes first, so
+                  Next from the last lesson of the week before lands on it.
+                {%- endcomment -%}
+                {%- assign weekUrl = "/" | append: current_course | append: "/week-" | append: week | append: "/" -%}
+                <a href="{{ site.baseurl }}{{ weekUrl }}" class="lesson-item {% if page.url == weekUrl %}active{% endif %}" title="Week {{ week }} intro">
+                  <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  <span class="lesson-title ocs__truncate ocs__truncate--hover">Week {{ week }} intro</span>
+                </a>
                 {%- assign assignmentCount = 0 -%}
                 {%- for post in weekPosts -%}
                   {%- if post.assignment == true -%}

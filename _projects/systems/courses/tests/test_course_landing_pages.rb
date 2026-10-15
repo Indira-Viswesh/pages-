@@ -188,6 +188,11 @@ Dir.mktmpdir("course-landing-") do |source|
              "#{path} retains week chat access in course navigation")
       assert(sidebar.include?('data-lesson-id="/' + course + '/example/"'),
              "#{path} preserves lesson completion identity")
+      week = sidebar[%r{<details data-week-group data-week="1".*?</details>}m].to_s
+      assert(sidebar.scan('<details data-week-group data-week="1"').size == 1 && week.match?(%r{<summary class="sprint-toggle" title="W1: Foundations">\s*<span class="ocs__status-pill ocs__status-pill--good">W1</span>\s*<span class="lesson-title ocs__truncate"><strong>Foundations</strong></span>\s*<span class="ocs__status-pill ocs__status-pill--neutral" data-week-count}),
+             "#{path} shows a week as one row: W pill, then the title cut with an ellipsis, then the count")
+      assert(week.match?(%r{</summary>\s*<div class="ocs__tree">\s*<a href="/preview/#{course}/week-1/"}),
+             "#{path} puts the week's intro first in the week's tree, even with its lessons")
       assert(html.include?('course-mobile-nav"'), "#{path} exposes course pills on mobile")
       assert(!sidebar.include?("href=\"/preview/#{course}/blogs/\""),
              "#{path} omits redundant sidebar Blogs")

@@ -197,17 +197,6 @@
     lessons.dispatchEvent(new CustomEvent('navigation-toggle', { bubbles: true }));
   };
 
-  // A week is a <details>, so the browser opens and closes it; this only
-  // turns its chevron to match, the way toggleSprint() turns a sprint's.
-  document.querySelectorAll('[data-week-group]').forEach((week) => {
-    week.addEventListener('toggle', () => {
-      const chevron = week.querySelector('summary .sprint-chevron');
-      if (!chevron) return;
-      chevron.classList.toggle('fa-chevron-right', !week.open);
-      chevron.classList.toggle('fa-chevron-down', week.open);
-    });
-  });
-
   /**
    * ============================================
    * COMPLETION DATA LAYER: LocalStorage operations
@@ -467,8 +456,8 @@
    * TIMELINE MODAL: Mobile navigation
    * ============================================
    * The phone menu mirrors the sidebar: each sprint card lists the sprint's
-   * intro, then each week as a heading with its intro and an ocs__tree of its
-   * lessons and chat, read from the sidebar's markup.
+   * intro, then each week as a heading (its W pill, then its title) over an
+   * ocs__tree of its intro, lessons and chat, read from the sidebar's markup.
    */
   function buildTimelineModal() {
     const completionData = getCompletionData();
@@ -487,7 +476,6 @@
       weeks: Array.from(section.querySelectorAll('[data-week-group]'), week => ({
         title: week.querySelector('summary .lesson-title').textContent.trim(),
         badge: week.querySelector('summary .ocs__status-pill').textContent.trim(),
-        intros: Array.from(week.querySelectorAll(':scope > .lesson-item'), toRow),
         rows: Array.from(week.querySelectorAll('.ocs__tree > .lesson-item, .ocs__tree .ocs__links a'), toRow)
       }))
     }));
@@ -515,8 +503,7 @@
     modalContent.innerHTML = sprints.map(sprint => {
       const sprintId = sprint.title.replace(/\s+/g, '-').toLowerCase();
       const weeksHTML = sprint.weeks.map(week => `
-          <h4 class="ocs__section-title">${escapeHTML(week.title)} <span class="ocs__status-pill ocs__status-pill--good">${escapeHTML(week.badge)}</span></h4>
-          ${week.intros.map(renderModalRow).join('')}
+          <h4 class="ocs__section-title"><span class="ocs__status-pill ocs__status-pill--good">${escapeHTML(week.badge)}</span> ${escapeHTML(week.title)}</h4>
           <div class="ocs__tree">${week.rows.map(renderModalRow).join('')}
           </div>`).join('');
 

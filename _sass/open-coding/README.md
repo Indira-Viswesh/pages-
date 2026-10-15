@@ -237,7 +237,8 @@ week's lessons and chat this way.
   text wraps instead and stays readable.
 
 See [`elements/typography`](elements/typography). The course sidebar's lesson
-rows and the phone menu use both classes.
+rows and the phone menu use both classes. The sidebar's week titles use
+`ocs__truncate` alone: their space is too narrow to wrap without breaking words.
 
 ### Capstone document elements
 
