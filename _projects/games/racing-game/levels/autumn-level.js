@@ -21,16 +21,16 @@ class GameLevelAutumn {
         STEP_FACTOR: 1100,
         INIT_POSITION: {x: 340 / 740, y: 500 / 585},
         pixels: { height: 1024, width: 1536 },
-        // A complete car fits inside this 320px square; the old 256px rows clipped it.
+        // Use 320px crops: straight cars at (32, 0), drift effects at (800, 0) and (64, 480).
         orientation: { rows: 1024 / 320, columns: 1536 / 320 },
         up:        { row: 0, start: 0.1, columns: 1, rotate: Math.PI },
-        upRight:   { row: 0, start: 0.1, columns: 1, rotate: -3 * Math.PI / 4 },
+        upRight:   { row: 0, start: 2.5, columns: 1, rotate: Math.PI },
         right:     { row: 0, start: 0.1, columns: 1, rotate: -Math.PI / 2 },
-        downRight: { row: 0, start: 0.1, columns: 1, rotate: -Math.PI / 4 },
+        downRight: { row: 1.5, start: 0.2, columns: 1, rotate: Math.PI },
         down:      { row: 0, start: 0.1, columns: 1 },
-        downLeft:  { row: 0, start: 0.1, columns: 1, rotate: Math.PI / 4 },
+        downLeft:  { row: 0, start: 2.5, columns: 1 },
         left:      { row: 0, start: 0.1, columns: 1, rotate: Math.PI / 2 },
-        upLeft:    { row: 0, start: 0.1, columns: 1, rotate: 3 * Math.PI / 4 },
+        upLeft:    { row: 1.5, start: 0.2, columns: 1 },
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
         keypress: { up: 87, left: 65, down: 83, right: 68 } // W, A, S, D
     }
@@ -42,16 +42,16 @@ class GameLevelAutumn {
         STEP_FACTOR: 1100,
         INIT_POSITION: {x: 340 / 740 - 0.08, y: 500 / 585}, // start behind the red car so they don't overlap
         pixels: { height: 1024, width: 1536 },
-        // A complete car fits inside this 320px square; the old 256px rows clipped it.
+        // Use 320px crops: straight cars at (32, 0), drift effects at (800, 0) and (64, 480).
         orientation: { rows: 1024 / 320, columns: 1536 / 320 },
         up:        { row: 0, start: 0.1, columns: 1, rotate: Math.PI },
-        upRight:   { row: 0, start: 0.1, columns: 1, rotate: -3 * Math.PI / 4 },
+        upRight:   { row: 0, start: 2.5, columns: 1, rotate: Math.PI },
         right:     { row: 0, start: 0.1, columns: 1, rotate: -Math.PI / 2 },
-        downRight: { row: 0, start: 0.1, columns: 1, rotate: -Math.PI / 4 },
+        downRight: { row: 1.5, start: 0.2, columns: 1, rotate: Math.PI },
         down:      { row: 0, start: 0.1, columns: 1 },
-        downLeft:  { row: 0, start: 0.1, columns: 1, rotate: Math.PI / 4 },
+        downLeft:  { row: 0, start: 2.5, columns: 1 },
         left:      { row: 0, start: 0.1, columns: 1, rotate: Math.PI / 2 },
-        upLeft:    { row: 0, start: 0.1, columns: 1, rotate: 3 * Math.PI / 4 },
+        upLeft:    { row: 1.5, start: 0.2, columns: 1 },
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
         keypress: { up: 38, left: 37, down: 40, right: 39 } // Arrow keys
     }
