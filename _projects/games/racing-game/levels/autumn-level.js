@@ -1,5 +1,5 @@
 import GameEnvBackground from '@assets/js/GameEnginev1.1/essentials/GameEnvBackground.js';
-import Player from '@assets/js/GameEnginev1.1/essentials/Player.js';
+import Player from './RacingPlayer.js';
 import Character from '@assets/js/GameEnginev1.1/essentials/Character.js';
 import SplineBarrier from '@assets/js/GameEnginev1.1/essentials/SplineBarrier.js';
 import TimeLapScreen from './TimeLapScreen.js';
@@ -21,15 +21,16 @@ class GameLevelAutumn {
         STEP_FACTOR: 1100,
         INIT_POSITION: {x: 340 / 740, y: 500 / 585},
         pixels: { height: 1024, width: 1536 },
-        orientation: { rows: 4, columns: 4 },
-        up:        { row: 3, start: 0, columns: 1 },
-        upRight:   { row: 0, start: 2, columns: 1, rotate: Math.PI },
-        right:     { row: 1, start: 0, columns: 1 },
-        downRight: { row: 2, start: 0, columns: 1 },
-        down:      { row: 0, start: 0, columns: 1 },
-        downLeft:  { row: 0, start: 2, columns: 1 },
-        left:      { row: 3, start: 2, columns: 1 },
-        upLeft:    { row: 2, start: 0, columns: 1, rotate: Math.PI },
+        // A complete car fits inside this 320px square; the old 256px rows clipped it.
+        orientation: { rows: 1024 / 320, columns: 1536 / 320 },
+        up:        { row: 0, start: 0.1, columns: 1, rotate: Math.PI },
+        upRight:   { row: 0, start: 0.1, columns: 1, rotate: -3 * Math.PI / 4 },
+        right:     { row: 0, start: 0.1, columns: 1, rotate: -Math.PI / 2 },
+        downRight: { row: 0, start: 0.1, columns: 1, rotate: -Math.PI / 4 },
+        down:      { row: 0, start: 0.1, columns: 1 },
+        downLeft:  { row: 0, start: 0.1, columns: 1, rotate: Math.PI / 4 },
+        left:      { row: 0, start: 0.1, columns: 1, rotate: Math.PI / 2 },
+        upLeft:    { row: 0, start: 0.1, columns: 1, rotate: 3 * Math.PI / 4 },
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
         keypress: { up: 87, left: 65, down: 83, right: 68 } // W, A, S, D
     }
@@ -41,15 +42,16 @@ class GameLevelAutumn {
         STEP_FACTOR: 1100,
         INIT_POSITION: {x: 340 / 740 - 0.08, y: 500 / 585}, // start behind the red car so they don't overlap
         pixels: { height: 1024, width: 1536 },
-        orientation: { rows: 4, columns: 4 },
-        up:        { row: 3, start: 0, columns: 1 },
-        upRight:   { row: 0, start: 2, columns: 1, rotate: Math.PI },
-        right:     { row: 3, start: 2, columns: 1, rotate: Math.PI },
-        downRight: { row: 2, start: 0, columns: 1 },
-        down:      { row: 0, start: 0, columns: 1 },
-        downLeft:  { row: 0, start: 2, columns: 1 },
-        left:      { row: 3, start: 2, columns: 1 },
-        upLeft:    { row: 2, start: 0, columns: 1, rotate: Math.PI },
+        // A complete car fits inside this 320px square; the old 256px rows clipped it.
+        orientation: { rows: 1024 / 320, columns: 1536 / 320 },
+        up:        { row: 0, start: 0.1, columns: 1, rotate: Math.PI },
+        upRight:   { row: 0, start: 0.1, columns: 1, rotate: -3 * Math.PI / 4 },
+        right:     { row: 0, start: 0.1, columns: 1, rotate: -Math.PI / 2 },
+        downRight: { row: 0, start: 0.1, columns: 1, rotate: -Math.PI / 4 },
+        down:      { row: 0, start: 0.1, columns: 1 },
+        downLeft:  { row: 0, start: 0.1, columns: 1, rotate: Math.PI / 4 },
+        left:      { row: 0, start: 0.1, columns: 1, rotate: Math.PI / 2 },
+        upLeft:    { row: 0, start: 0.1, columns: 1, rotate: 3 * Math.PI / 4 },
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
         keypress: { up: 38, left: 37, down: 40, right: 39 } // Arrow keys
     }
