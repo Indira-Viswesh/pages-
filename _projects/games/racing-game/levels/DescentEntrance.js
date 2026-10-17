@@ -17,7 +17,7 @@ class RaceProgress {
     const loserIndex = 1 - winnerIndex;
     this.losses[winnerIndex] = 0;
     this.losses[loserIndex] += 1;
-    return this.losses[loserIndex] === 3 ? loserIndex : null;
+    return loserIndex; // Offer a voluntary second chance after each lost race.
   }
 
   enter(gameControl, challenger) {
@@ -88,7 +88,12 @@ export default class DescentEntrance extends TimeLapScreen {
     this.resultRecorded = true;
     const winner = this.getPlayers().findIndex((player, index) => this.getPlayerLabel(player, index) === this.winnerLabel);
     const challenger = this.progress.recordFinish(winner);
-    if (challenger !== null) this.pendingChallenger = challenger;
+    if (challenger !== null) {
+      // Replace the shared countdown so it cannot restart the race over this choice.
+      this.losingScreen?.destroy();
+      this.losingScreen = null;
+      this.pendingChallenger = challenger;
+    }
   }
 
   update() {
@@ -96,9 +101,9 @@ export default class DescentEntrance extends TimeLapScreen {
     if (this.pendingChallenger === undefined) return;
     this.challenger = this.pendingChallenger;
     this.pendingChallenger = undefined;
-    this.element.querySelector('p').textContent = `P${this.challenger + 1}: three losses, but your race is not over. Brave the Hell track for a second chance, or stay here and race again. The choice is yours.`;
+    this.element.querySelector('p').textContent = `P${this.challenger + 1}: want a second chance? Enter the secret Hell track, or stay here and race again. The choice is yours.`;
     this.previousFocus = document.activeElement;
-    this.gameEnv.gameControl.pause();
+    if (!this.gameEnv.gameControl.isPaused) this.gameEnv.gameControl.pause();
     this.element.hidden = false;
     this.declineButton.focus();
     this.draw();

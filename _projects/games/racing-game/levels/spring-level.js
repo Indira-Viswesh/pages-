@@ -17,7 +17,7 @@ class GameLevelSpring {
         greeting: "I'm the red car!",
         src: path + '/images/projects/racing-game/Directions_red_car.png',
         INIT_POSITION: { x: 340 / 740, y: 450 / 585},
-        SCALE_FACTOR: 20,
+        SCALE_FACTOR: 10,
         STEP_FACTOR: 1200,
         pixels: { height: 1024, width: 1536 },
         orientation: { rows: 4, columns: 4 },
